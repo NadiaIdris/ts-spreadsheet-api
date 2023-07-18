@@ -22,9 +22,9 @@ app.get("/sp/get", (request: Request, response: Response) => {
     const fs = require("fs");
     if (!fs.existsSync("./data")) {
       fs.mkdirSync("./data");
-      if (!fs.existsSync("./data/spreadsheet.json")) {
-        fs.writeFileSync("./data/spreadsheet.json", "{}");
-      }
+    }
+    if (!fs.existsSync("./data/spreadsheet.json")) {
+      fs.writeFileSync("./data/spreadsheet.json", "{}");
     }
 
     // Note: If the file starts with "./" it is considered a relative file to the file that called require.
