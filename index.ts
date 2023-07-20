@@ -2,6 +2,7 @@
 import bodyParser from "body-parser";
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+const fs = require("fs");
 
 // Configure dotenv library to load in the environment variables from .env file.
 dotenv.config();
@@ -23,7 +24,6 @@ app.get("/sp/get", (request: Request, response: Response) => {
   // Try to get spreadsheet.json file with the data from the user's file system.
   // If it doesn't exist, make it and return an empty spreadsheet.json file.
   try {
-    const fs = require("fs");
     if (!fs.existsSync("./data")) {
       fs.mkdirSync("./data");
     }
@@ -38,7 +38,6 @@ app.get("/sp/get", (request: Request, response: Response) => {
     const spreadsheet = fs.readFileSync("./data/spreadsheet.json", "utf8");
     response.send(spreadsheet);
   } catch (err: any) {
-    console.log("Error: " + err);
     response.send("Error: " + err);
   }
 });
@@ -48,8 +47,6 @@ app.post("/sp/set", (request: Request, response: Response) => {
   // Try to save spreadsheet.json file with the data from the user's file system.
   // If it doesn't exist, make it and return an empty spreadsheet.json file.
 	try {
-		console.log(request.body)
-    const fs = require("fs");
 		const data = Buffer.alloc(JSON.stringify(request.body).length, JSON.stringify(request.body))
 		fs.writeFileSync("./data/spreadsheet.json", data);
     response.send("Success ---> spreadsheet.json file saved.");
