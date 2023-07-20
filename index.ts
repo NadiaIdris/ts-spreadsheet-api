@@ -28,7 +28,7 @@ app.get("/sp/get", (request: Request, response: Response) => {
       fs.mkdirSync("./data");
     }
     if (!fs.existsSync("./data/spreadsheet.json")) {
-      fs.writeFileSync("./data/spreadsheet.json", "{}", (error: Error) => {
+      fs.writeFileSync("./data/spreadsheet.json", "[]", (error: Error) => {
         if (error)
           console.error("Error trying to write file sync: --> ", error);
       });
