@@ -35,7 +35,10 @@ app.get("/sp/get", (request: Request, response: Response) => {
     }
 
     // Note: If the file starts with "./" it is considered a relative file to the file that called require.
-    const spreadsheet = fs.readFileSync("./data/spreadsheet.json", "utf8");
+		const spreadsheet = fs.readFileSync("./data/spreadsheet.json", "utf8");
+		response.setHeader("Content-Type", "application/json");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Vary", "Origin");
     response.send(spreadsheet);
   } catch (err: any) {
     response.send("Error: " + err);
